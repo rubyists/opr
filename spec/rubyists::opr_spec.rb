@@ -8,8 +8,8 @@ module Rubyists # rubocop:disable Naming/FileName
 
       context 'command' do
         it 'Finds the `op` binary' do
-          expect(Opr::Command::OPBIN.empty?).to be false
-          expect(Pathname(Opr::Command::OPBIN).exist?).to be true
+          expect(Opr::Command.opbin.empty?).to be false
+          expect(Pathname(Opr::Command.opbin).exist?).to be true
         end
       end
     end

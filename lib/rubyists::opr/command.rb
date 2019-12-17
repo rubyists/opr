@@ -8,11 +8,18 @@ module Rubyists
   module Opr
     # Command class
     class Command
-      OPBIN = `which op`.chomp.freeze
-
       extend Forwardable
 
       def_delegators :command, :run
+
+      def self.opbin(bin_name: 'op')
+        raise Error, 'attribute bin_name cannot be nil' if bin_name.empty?
+
+        @opbin ||= `which #{bin_name}`.chomp
+        raise Error, '`op` binary not found' if @opbin.empty?
+
+        @opbin
+      end
 
       # Execute this command
       #
