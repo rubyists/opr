@@ -27,8 +27,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'highline'
+  spec.add_dependency 'pry'
   spec.add_dependency 'tty'
   spec.add_dependency 'tty-prompt'
+  spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
