@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'This utility/library exposes the 1password `op` cli in an easier to digest form.'
   spec.homepage      = 'https://gitlab.com/rubyists/opr.'
 
-  spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
+  spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://gitlab.com/rubyists/opr.'
@@ -28,10 +28,11 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'highline'
   spec.add_dependency 'pry'
+  spec.add_dependency 'thor'
   spec.add_dependency 'tty'
   spec.add_dependency 'tty-prompt'
-  spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rubocop-performance'
 end

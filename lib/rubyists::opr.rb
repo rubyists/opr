@@ -9,6 +9,15 @@ module Rubyists
     LIBDIR = ROOT.join('lib/rubyists::opr')
     MODEL_DIR = LIBDIR.join('model')
 
+    def self.opbin(bin_name: 'op')
+      raise Error, 'attribute bin_name cannot be nil' if bin_name.empty?
+
+      @opbin ||= `which #{bin_name}`.chomp
+      raise Error, '`op` binary not found' if @opbin.empty?
+
+      @opbin
+    end
+
     def self.R(rbf) # rubocop:disable Naming/MethodName
       require ROOT.join(rbf.to_s).to_s
     end
