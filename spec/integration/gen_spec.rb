@@ -1,6 +1,6 @@
 RSpec.describe '`opr gen` command', type: :cli do
   it 'executes `opr help gen` command successfully' do
-    output = `rubyists::opr help gen`
+    output = `opr help gen`
     expected_output = <<-OUT
 Usage:
   opr gen

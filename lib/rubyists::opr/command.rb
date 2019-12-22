@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../rubyists::opr'
 require 'forwardable'
 require 'highline'
 require 'json'
@@ -10,6 +11,7 @@ module Rubyists
     class Command
       extend Forwardable
 
+      attr_reader :options
       def_delegators :command, :run
       # Execute this command
       #

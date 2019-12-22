@@ -9,6 +9,14 @@ module Rubyists
     LIBDIR = ROOT.join('lib/rubyists::opr')
     MODEL_DIR = LIBDIR.join('model')
 
+    def self.login!
+      out = `#{opbin} signin`
+      firstline = out.split("\n").first.split('=')
+      key = firstline.first.split.last
+      val = JSON.parse(firstline.last)
+      ENV[key] = val
+    end
+
     def self.opbin(bin_name: 'op')
       raise Error, 'attribute bin_name cannot be nil' if bin_name.empty?
 
