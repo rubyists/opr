@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../rubyists::opr'
 require 'forwardable'
 require 'highline'
 require 'json'

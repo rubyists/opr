@@ -1,6 +1,7 @@
 require 'tty-command'
 module Rubyists
   module Opr
+    # Represents a 1password vault
     class Vault
       def self.from_output(string)
         from_hash JSON.parse(string)
@@ -17,6 +18,10 @@ module Rubyists
         vaults.map { |v| from_hash v }
       end
 
+      def self.find_by_name(name)
+        all.detect { |n| n.name == name }
+      end
+
       attr_reader :name, :uuid
       def initialize(uuid:, name:)
         @name = name
@@ -28,7 +33,8 @@ module Rubyists
 
         cmd = TTY::Command.new pty: true, printer: :null
         out, err = cmd.run "#{Opr.opbin} list items --vault='#{name}'"
-        @items = Item.from_output out
+        array = JSON.parse out
+        @items = array.map { |h| Item.from_hash h }
       end
     end
   end
