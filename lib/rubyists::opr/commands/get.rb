@@ -12,8 +12,13 @@ module Rubyists
         end
 
         def execute(input: $stdin, output: $stdout)
-          # Command logic goes here ...
-          output.puts "OK"
+          vault = if options[:vault]
+                    options[:vault]
+                  else
+                    warn 'No vault specified, using "Private"'
+                    'Private'
+                  end
+          Opr.with_login { output.puts Item.find(@item, vault: vault) }
         end
       end
     end
