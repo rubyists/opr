@@ -15,15 +15,7 @@ module Rubyists
           end
 
           def execute(input: $stdin, output: $stdout) # rubocop:disable Lint/UnusedMethodArgument
-            # Command logic goes here ...
-            puts Vault.all.map(&:name)
-          rescue TTY::Command::ExitError => e
-            raise unless e.to_s.match? 'not currently signed in'
-
-            warn "You are not currently logged in to 1pass"
-            warn "Consider running `eval (op signin)` in your shell to avoid logging in for each opr command"
-            Opr.login!
-            retry
+            Opr.with_login { output.puts Vault.all.map(&:name) }
           end
         end
       end

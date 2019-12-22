@@ -9,6 +9,17 @@ module Rubyists
     LIBDIR = ROOT.join('lib/rubyists::opr')
     MODEL_DIR = LIBDIR.join('model')
 
+    def self.with_login
+      yield
+    rescue TTY::Command::ExitError => e
+      raise unless e.to_s.match?(/not currently signed in|401: Authentication/)
+
+      warn 'You are not currently logged in to 1pass'
+      warn 'Consider running `eval (op signin)` in your shell to avoid logging in for each opr command'
+      Opr.login!
+      retry
+    end
+
     def self.login!
       out = `#{opbin} signin`
       firstline = out.split("\n").first.split('=')
