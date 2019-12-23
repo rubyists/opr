@@ -26,7 +26,7 @@ Or install it yourself as:
 - `opr list items --vault=SomeVault` List all items in SomeVault
 - `opr get SomeVault/SomeItem` Get the password from SomeVault named SomeItem. This should be piped to xclip/pbcopy.
 - `opr gen` Generate a new password (8-16 characters)
-- `echo "#@%!" | opr gen` Generate a new password, using only "#@%!" as "special" characters.
+- `echo "\#@%!" | opr gen` Generate a new password, using only "#@%!" as "special" characters.
 - `opr gen -s15` Generate a new password, 15 chars long
 
 ## Development
