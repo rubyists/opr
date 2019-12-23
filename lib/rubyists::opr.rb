@@ -21,7 +21,9 @@ module Rubyists
     end
 
     def self.login!
-      out = `#{opbin} signin`
+      out = `#{opbin} signin 2>&1`
+      raise "Problem logging in #{out}" if out.match? '(ERROR)'
+
       firstline = out.split("\n").first.split('=')
       key = firstline.first.split.last
       val = JSON.parse(firstline.last)

@@ -38,14 +38,17 @@ module Rubyists
       end
 
       require_relative 'commands/list'
-      register Rubyists::Opr::Commands::List, 'list', 'list [SUBCOMMAND]', 'Command description...'
+      register Rubyists::Opr::Commands::List, 'list', 'list [SUBCOMMAND]', 'List items/vaults'
 
       desc 'gen [NAME | VAULT/NAME]',
-           'Generate a new password. If NAME or VAULT/NAME is given, store the generated pass, otherwise output it'
+           <<~TXT
+             Generate a new password. If NAME or VAULT/NAME is given, store the generated pass, otherwise output it.
+             if STDIN is passed, will use those characters as the special characters.
+           TXT
       method_option :min, type: :numeric, desc: 'Minimum Pass size', default: 8, aliases: ['-m']
       method_option :max, type: :numeric, desc: 'Maximum Pass size', aliases: ['-M']
       method_option :size, type: :numeric, desc: 'Exact Pass size', aliases: ['-s']
-      method_option :chars, type: :boolean, desc: 'Use Special Chars'
+      method_option :chars, type: :boolean, desc: '(Do not) Use Special Chars', default: true
       method_option :vault, type: :string, desc: 'Vault to save password in', default: 'Private'
       method_option :type, type: :string, enum: %w[login note], default: 'login',
                            desc: 'The type of item to store'

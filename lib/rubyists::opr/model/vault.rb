@@ -28,6 +28,16 @@ module Rubyists
         @uuid = uuid
       end
 
+      def insert(name:, password:, type: 'login', username: nil, notes: nil)
+        current = Item.find(name, vault: self.name)
+        raise "There is already an item named #{name} in the #{self.name} vault" if current
+
+        tpl = Opr::LIBDIR.join("commands/templates/gen/#{type}.erb")
+        erb = ERB.new(tpl.read)
+        hash = JSON.parse erb.result(binding)
+        Item.create!(hash, vault: uuid, name: name)
+      end
+
       def items
         return @items if @items
 

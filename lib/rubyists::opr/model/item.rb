@@ -12,7 +12,7 @@ module Rubyists
 
       def self.find(item, vault:)
         cmd = TTY::Command.new pty: true, printer: :null
-        out, err = cmd.run "#{Opr.opbin} get item #{item} --vault='#{vault}'"
+        out, err = cmd.run "#{Opr.opbin} get item '#{item}' --vault='#{vault}'"
         raise Error, err unless err.empty?
 
         item = from_output out

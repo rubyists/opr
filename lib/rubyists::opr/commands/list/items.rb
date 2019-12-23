@@ -20,7 +20,7 @@ module Rubyists
               @vault = 'Private'
             end
             # Command logic goes here ...
-            puts Vault.find_by_name(vault).items.map(&:title)
+            Opr.with_login { output.puts Vault.find_by_name(vault).items.map(&:title) }
           end
         end
       end

@@ -10,10 +10,9 @@ module Rubyists
     module Commands
       # List commands
       class List < Thor
-
         namespace :list
 
-        desc 'items', 'Command description...'
+        desc 'items [VAULT]', 'List Items in VAULT. Defaults to "Private" if no VAULT given'
         method_option :help, aliases: '-h', type: :boolean,
                              desc: 'Display usage information'
         def items(vault = nil)
@@ -25,7 +24,7 @@ module Rubyists
           end
         end
 
-        desc 'vaults', 'Command description...'
+        desc 'vaults', 'List vaults'
         method_option :help, aliases: '-h', type: :boolean,
                              desc: 'Display usage information'
         def vaults(*)

@@ -40,9 +40,9 @@ module Rubyists # {{{
         elsif size >= 12
           3..5
         elsif size >= 8
-          2..4
+          2..3
         else
-          1..3
+          1..2
         end.to_a
       end # }}}
 
