@@ -1,15 +1,14 @@
-# Rubyists::Opr
+# Opr
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rubyists::opr`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem supplies the `opr` binary, which wraps the 1password `op` cli from https://1password.com/downloads/command-line/.
+The goal of opr is to be as compatible as possible with the `pass` cli from https://www.passwordstore.org/.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rubyists::opr'
+gem 'opr'
 ```
 
 And then execute:
@@ -18,11 +17,17 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rubyists::opr
+    $ gem install opr
 
 ## Usage
 
-TODO: Write usage instructions here
+`opr --help`
+`opr list vaults` List all vaults
+`opr list items --vault=SomeVault` List all items in SomeVault
+`opr get SomeVault/SomeItem` Get the password from SomeVault named SomeItem. This should be piped to xclip/pbcopy.
+`opr gen` Generate a new password (8-16 characters)
+`echo "#@%!" | opr gen` Generate a new password, using only "#@%!" as "special" characters.
+`opr gen -s15` Generate a new password, 15 chars long
 
 ## Development
 
@@ -32,12 +37,12 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rubyists::opr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rubyists::opr/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/[rubyists]/opr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[rubyists]/opr/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## Code of Conduct
 
-Everyone interacting in the Rubyists::Opr project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/rubyists::opr/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Rubyists::Opr project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[rubyists]/opr/blob/master/CODE_OF_CONDUCT.md).
 
 ## Copyright
 
