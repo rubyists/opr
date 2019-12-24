@@ -12,11 +12,16 @@ module Rubyists
 
       def self.find(item, vault:)
         cmd = TTY::Command.new pty: true, printer: :null
-        out, err = cmd.run "#{Opr.opbin} get item '#{item}' --vault='#{vault}'"
+        out, err = Opr.with_login do
+          cmd.run "#{Opr.opbin} get item '#{item}' --vault='#{vault}'"
+        end
         raise Error, err unless err.empty?
 
-        item = from_output out
-        item.password
+        from_output out
+      rescue TTY::Command::ExitError => e
+        return nil if e.to_s.match? /item with query "#{Regexp.escape(item)}" not found/
+
+        raise
       end
 
       attr_reader :name, :uuid, :raw
@@ -24,6 +29,17 @@ module Rubyists
         @name = name
         @uuid = uuid
         @raw  = raw
+      end
+
+      def vault_uuid
+        @vault_uuid ||= raw['vaultUuid']
+      end
+
+      def delete!
+        Opr.with_login do
+          cmd = TTY::Command.new pty: true, printer: :null
+          cmd.run "#{Opr.opbin} delete item '#{name}' --vault='#{vault_uuid}'"
+        end
       end
 
       def password

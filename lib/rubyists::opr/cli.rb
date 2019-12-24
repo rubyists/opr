@@ -24,6 +24,20 @@ module Rubyists
       end
       map %w[--version -v] => :version
 
+      desc 'rm ITEM', 'Remove an item from a vault'
+      method_option :vault, aliases: '-v', type: :string,
+                             desc: 'The vault to look for ITEM'
+      method_option :help, aliases: '-h', type: :boolean,
+                           desc: 'Display usage information'
+      def rm(item)
+        if options[:help]
+          invoke :help, ['rm']
+        else
+          require_relative 'commands/rm'
+          Rubyists::Opr::Commands::Rm.new(item, options).execute
+        end
+      end
+
       desc 'get ITEM', 'Get the contents of an item'
       method_option :vault, aliases: '-v', type: :string, desc: 'Which vault the item is in'
       method_option :help, aliases: '-h', type: :boolean,

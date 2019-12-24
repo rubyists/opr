@@ -23,7 +23,7 @@ module Rubyists
             warn 'No vault specified, using "Private"'
             vault = 'Private'
           end
-          Opr.with_login { output.puts Item.find(@item, vault: vault) }
+          Opr.with_login { output.puts Item.find(@item, vault: vault).password }
         end
       end
     end
