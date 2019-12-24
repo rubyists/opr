@@ -28,6 +28,10 @@ Or install it yourself as:
 - `opr gen` Generate a new password (8-16 characters)
 - `echo "\#@%!" | opr gen` Generate a new password, using only "#@%!" as "special" characters.
 - `opr gen -s15` Generate a new password, 15 chars long
+- `opr gen -s15 NewItem` Generate a new password, 15 chars long, save as "NewItem" in vault "Private"
+- `opr gen -m15 -M20 NewItem --vault=MyVault` Generate a new password, 15-20 chars long, save as "NewItem" in vault "MyVault"
+- `opr rm NewItem --vault=MyVault` Remove the item 'NewItem' from vault 'MyVault'
+- `opr rm NewItem` Remove the item 'NewItem' from vault 'Private'
 
 ## Development
 
