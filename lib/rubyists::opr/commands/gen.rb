@@ -40,7 +40,8 @@ module Rubyists
           parsed = parse_path
           Opr.with_login do
             vault = Vault.find_by_name(parsed.vault)
-            vault.insert(name: parsed.name, type: :login, password: pass, username: options[:username])
+            vault.insert(title: parsed.name, type: :login, password: pass,
+                         username: options[:username], notes: options[:notes])
           end
           output.puts "#{parsed.name} saved in #{parsed.vault}"
         end

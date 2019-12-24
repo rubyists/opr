@@ -13,7 +13,9 @@ module Rubyists
 
       def self.all
         cmd = TTY::Command.new pty: true, printer: :null
-        out, err = cmd.run Opr.opbin, 'list', 'vaults'
+        out, err = Opr.with_login { cmd.run Opr.opbin, 'list', 'vaults' }
+        raise "Error #{err}" unless err.nil? || err.empty?
+
         vaults = JSON.parse out
         vaults.map { |v| from_hash v }
       end
@@ -28,21 +30,23 @@ module Rubyists
         @uuid = uuid
       end
 
-      def insert(name:, password:, type: 'login', username: nil, notes: nil)
-        current = Item.find(name, vault: self.name)
-        raise "There is already an item named #{name} in the #{self.name} vault" if current
+      def insert(title:, password:, type: 'login', username: nil, notes: nil)
+        current = Item.find(title, vault: name)
+        raise "There is already an item named #{title} in the #{name} vault" if current
 
         tpl = Opr::LIBDIR.join("commands/templates/gen/#{type}.erb")
         erb = ERB.new(tpl.read)
-        hash = JSON.parse erb.result(binding)
-        Item.create!(hash, vault: uuid, name: name)
+        json = erb.result(binding)
+        Item.create(json, title, name, type: :login)
       end
 
       def items
         return @items if @items
 
         cmd = TTY::Command.new pty: true, printer: :null
-        out, err = cmd.run "#{Opr.opbin} list items --vault='#{name}'"
+        out, err = Opr.with_login { cmd.run "#{Opr.opbin} list items --vault='#{name}'" }
+        raise "Error #{err}" unless err.nil? || err.empty?
+
         array = JSON.parse out
         @items = array.map { |h| Item.from_hash h }
       end

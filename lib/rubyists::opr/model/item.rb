@@ -10,6 +10,14 @@ module Rubyists
         new uuid: hash['uuid'], name: hash['overview']['title'], raw: hash
       end
 
+      def self.create(hash, title, vault = 'Private', type: :login)
+        cmd = TTY::Command.new pty: true, printer: :null
+        
+        Opr.with_login do
+          cmd.run "#{Opr.opbin} create item '#{type.capitalize}' '#{hash}' --vault='#{vault}' --title='#{title}'"
+        end
+      end
+
       def self.find(item, vault:)
         cmd = TTY::Command.new pty: true, printer: :null
         out, err = Opr.with_login do
