@@ -60,7 +60,7 @@ module Rubyists # {{{
       def self.passgen(minsize, maxsize = nil, chars = SAMPLES) # {{{
         doofus! "What's the point in a #{minsize} character pass? Minimum is 6" if minsize < 6
         maxsize ||= 16
-        doofus! "You're going to break something with a max size of #{maxsize} Max is #{MAX_PASS_SIZE}" if maxsize > MAX_PASS_SIZE # rubocop:disable Metrics/LineLength
+        doofus! "You're going to break something with a max size of #{maxsize} Max is #{MAX_PASS_SIZE}" if maxsize > MAX_PASS_SIZE # rubocop:disable Layout/LineLength
 
         maxsize = minsize if minsize > maxsize
         size = (minsize..maxsize).to_a.sample

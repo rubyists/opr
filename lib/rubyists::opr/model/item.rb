@@ -12,7 +12,7 @@ module Rubyists
 
       def self.create(hash, title, vault = 'Private', type: :login)
         cmd = TTY::Command.new pty: true, printer: :null
-        
+
         Opr.with_login do
           cmd.run "#{Opr.opbin} create item '#{type.capitalize}' '#{hash}' --vault='#{vault}' --title='#{title}'"
         end
@@ -27,7 +27,7 @@ module Rubyists
 
         from_output out
       rescue TTY::Command::ExitError => e
-        return nil if e.to_s.match? /item with query "#{Regexp.escape(item)}" not found/
+        return nil if e.to_s.match?(/item with query "#{Regexp.escape(item)}" not found/)
 
         raise
       end

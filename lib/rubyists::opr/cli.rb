@@ -26,7 +26,7 @@ module Rubyists
 
       desc 'rm ITEM', 'Remove an item from a vault'
       method_option :vault, aliases: '-v', type: :string,
-                             desc: 'The vault to look for ITEM'
+                            desc: 'The vault to look for ITEM'
       method_option :help, aliases: '-h', type: :boolean,
                            desc: 'Display usage information'
       def rm(item)
